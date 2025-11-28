@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roblox Helper Hub</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #0d1117;
+      color: #fff;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body.light { background: #f4f4f4; color: #111; }
+    header { background: linear-gradient(90deg,#ff0055,#00ffff); padding: 40px 20px; text-align: center; font-size: 3rem; font-weight: bold; color: #fff; }
+    header h1 { animation: slideIn 1s ease-out; }
+    @keyframes slideIn { from { transform: translateY(-100px); opacity: 0; } to { transform: translateY(0); opacity:1; } }
+    nav { background: #121620; padding: 15px; display: flex; justify-content: center; gap: 25px; position: sticky; top: 0; z-index: 100; transition: background 0.3s; }
+    body.light nav { background: #e0e0e0; }
+
+    nav a { color: #0af; text-decoration: none; font-size: 18px; transition: 0.3s; }
+    body.light nav a { color: #00f; }
+    nav a:hover { transform: scale(1.1); }
+    .section { padding: 50px 20px; max-width: 1200px; margin: auto; }
+    h2 { color: #0af; margin-bottom: 25px; font-size: 2rem; }
+    body.light h2 { color: #0077aa; }
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+      gap: 25px;
+    }
+    .card, .carousel-card {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s, background 0.3s;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden;
+    }
+    body.light .card, body.light .carousel-card {
+      background: #fff; color: #111;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .card:hover, .carousel-card:hover { transform: translateY(-5px); }
+    .card img, .carousel-card img { width: 100%; border-radius: 10px; object-fit: cover; height: 180px; }
+    input[type="text"] {
+      padding: 12px; width: 100%; border-radius: 12px; border: none;
+      margin-bottom: 25px; font-size: 16px;
+    }
+    footer {
+      background: #121620; text-align: center; padding: 25px;
+      color: #888; margin-top: 40px; font-size: 16px;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.light footer { background: #e0e0e0; color: #444; }
+    footer a { color: #0af; text-decoration: underline; transition: 0.3s; }
+    footer a:hover { color: #ff0; transform: scale(1.1); }
+    #themeToggle {
+      position: fixed; top: 20px; right: 20px;
+      padding: 12px 18px; background: #ff0; color: #000;
+      font-weight: bold; border-radius: 12px; border: none;
+      cursor: pointer; z-index: 200;
+    }
+    #backToTop {
+      position: fixed; bottom: 20px; right: 20px;
+      padding: 12px 18px; background: #0af; color: #000;
+      font-weight: bold; border-radius: 12px; border: none;
+      cursor: pointer; display: none; z-index: 200;
+    }
+    .carousel {
+      display: flex; overflow-x: auto; gap: 20px;
+      scroll-behavior: smooth; padding: 10px 0;
+    }
+    .carousel::-webkit-scrollbar { display: none; }
+    #particles {
+      position: fixed; top:0; left:0; width: 100vw; height: 100vh;
+      pointer-events: none; z-index: 5;
+    }
+    pre { background: #222; padding: 12px; border-radius: 10px; overflow-x:auto; }
+    body.light pre { background:#ddd; color:#111; }
+  </style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<header><h1>Roblox Helper Hub</h1></header>
+<button id="themeToggle">Toggle Light/Dark</button>
+
+<nav>
+  <a href="#codes">Promo Codes</a>
+  <a href="#guides">Game Guides</a>
+  <a href="#avatars">Avatar Ideas</a>
+  <a href="#scripts">Safe Scripts</a>
+  <a href="#news">Roblox News</a>
+</nav>
+
+<div class="section">
+  <input type="text" id="search" placeholder="Search codes, guides, avatars..." onkeyup="searchCards()">
+</div>
+
+<div class="section" id="codes">
+  <h2>🔥 Roblox Promo Codes</h2>
+  <div class="carousel" id="promo-carousel">
+    <div class="carousel-card">
+      <img src="https://coverr.co/s3/mp4s/val-fayad/Code-Mouse-Background-full-hd.mp4-cover.jpg" alt="Promo Code Image 1">
+      <strong>SPIDERCOLA</strong> – Spider Cola Shoulder Pet
+    </div>
+    <div class="carousel-card">
+      <img src="https://coverr.co/s3/mp4s/val-fayad/Val-Fayad-2-full-hd.mp4-cover.jpg" alt="Promo Code Image 2">
+      <strong>TWEETROBLOX</strong> – The Bird Says Shoulder Pet
+    </div>
+    <div class="carousel-card">
+      <img src="https://coverr.co/s3/mp4s/val-fayad/Val-Fayad-3-full-hd.mp4-cover.jpg" alt="Promo Code Image 3">
+      <strong>LUCKYDAY</strong> – Lucky Cat Backpack
+    </div>
+  </div>
+</div>
+
+<div class="section" id="guides">
+  <h2>📘 Game Guides</h2>
+  <div class="cards-container">
+    <div class="card">
+      <img src="https://coverr.co/s3/mp4s/val-fayad/Val-Fayad-4-full-hd.mp4-cover.jpg" alt="Guide 1">
+      <h3>Pet Simulator 99 – Fast Diamonds</h3>
+      <p>Use Diamond Mine daily, trade low items, farm mini‑chests efficiently.</p>
+    </div>
+    <div class="card">
+      <img src="https://coverr.co/s3/mp4s/val-fayad/Val-Fayad-5-full-hd.mp4-cover.jpg" alt="Guide 2">
+      <h3>Brookhaven – Secret Locations</h3>
+      <p>Hidden agency bunker, mountain base, abandoned shack, and mystery rooms.</p>
+    </div>
+    <div class="card">
+      <img src="https://coverr.co/s3/mp4s/val-fayad/Val-Fayad-6-full-hd.mp4-cover.jpg" alt="Guide 3">
+      <h3>Adopt Me – Best Pets Tier List</h3>
+      <p>Dragons, Frost Dragons, Shadow Dragons — top pets for trading & collections.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="avatars">
+  <h2>🎨 Avatar Ideas</h2>
+  <div class="cards-container">
+    <div class="card">
+      <img src="https://coverr.co/s3/mp4s/val-fayad/Val-Fayad-7-full-hd.mp4-cover.jpg" alt="Avatar Idea 1">
+      <p>Aesthetic / soft‑style outfits, pastel looks, cozy vibes.</p>
+    </div>
+    <div class="card">
+      <img src="https://coverr.co/s3/mp4s/val-fayad/Val-Fayad-8-full-hd.mp4-cover.jpg" alt="Avatar Idea 2">
+      <p>Gamer style — jackets, hats, cool streetwear combos.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="scripts">
+  <h2>🛡 Safe Roblox Scripts</h2>
+  <div class="cards-container">
+    <div class="card">
+      <p>Only safe, text‑based scripts for building / UI — no exploits.</p>
+      <pre>
+-- Simple Door Script
+script.Parent.Touched:Connect(function()
+  script.Parent:Destroy()
+end)
+      </pre>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="news">
+  <h2>📰 Roblox News</h2>
+  <div class="carousel" id="news-carousel">
+    <div class="carousel-card">
+      <img src="https://coverr.co/s3/mp4s/val-fayad/Val-Fayad-9-full-hd.mp4-cover.jpg" alt="News 1">
+      Roblox announces new avatar facial animations.
+    </div>
+    <div class="carousel-card">
+      <img src="https://coverr.co/s3/mp4s/val-fayad/Val-Fayad-10-full-hd.mp4-cover.jpg" alt="News 2">
+      New limited items released in Adopt Me.
+    </div>
+    <div class="carousel-card">
+      <img src="https://coverr.co/s3/mp4s/val-fayad/Val-Fayad-11-full-hd.mp4-cover.jpg" alt="News 3">
+      Roblox developer events and rewards announced.
+    </div>
+  </div>
+</div>
+
+<footer>© 2025 Roblox Helper Hub | Gaming Hub</footer>
+<button id="backToTop" onclick="scrollToTop()">Top</button>
+
+<script>
+  const back = document.getElementById('backToTop');
+  window.onscroll = () => back.style.display = (document.documentElement.scrollTop > 300) ? 'block' : 'none';
+  function scrollToTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
+  function searchCards(){
+    const v = document.getElementById('search').value.toLowerCase();
+    document.querySelectorAll('.card,.carousel-card').forEach(c=>{
+      c.style.display = c.innerText.toLowerCase().includes(v) ? '' : 'none';
+    });
+  }
+  document.getElementById('themeToggle').onclick = () => document.body.classList.toggle('light');
+
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  const max = 80;
+  function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resize);
+  resize();
+  class P {
+    constructor(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.s=Math.random()*2+1; this.vx=(Math.random()-0.5)*0.3; this.vy=(Math.random()-0.5)*0.3; }
+    update(){ this.x+=this.vx; this.y+=this.vy;
+      if(this.x<0) this.x=canvas.width; if(this.x>canvas.width) this.x=0;
+      if(this.y<0) this.y=canvas.height; if(this.y>canvas.height) this.y=0;
+    }
+    draw(){
+      const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.s*6);
+      g.addColorStop(0,'rgba(0,255,255,0.6)'); g.addColorStop(1,'rgba(0,255,255,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(this.x, this.y, this.s*3, 0, Math.PI*2); ctx.fill();
+    }
+  }
+  function init(){ particles=[]; for(let i=0;i<max;i++) particles.push(new P()); }
+  function anim(){ ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{ p.update(); p.draw(); }); requestAnimationFrame(anim); }
+  init(); anim();
+</script>
+
+</body>
+</html>
